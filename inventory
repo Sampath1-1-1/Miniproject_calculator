@@ -1,4 +1,3 @@
 ansible_host=localhost
-ansible_user=sampa
-ansible_ssh_pass=1920
+ansible_user=sam ansible_ssh_pass=sam333&333
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
