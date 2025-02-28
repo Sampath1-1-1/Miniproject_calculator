@@ -4,10 +4,10 @@
     remote_user: sam
     become: false
     tasks:
-      - name: Stop and Remove Existing sinc_calc Container (if exists)
+      - name: Stop and Remove Existing scientific_calculator Container (if exists)
         shell: |
           docker stop scientific_calculator || true
-          docker rm sscientific_calculator || true
+          docker rm scientific_calculator || true
         ignore_errors: yes
   
       - name: Remove Existing Docker Image (if exists)
