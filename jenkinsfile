@@ -3,6 +3,10 @@ pipeline {
     triggers { 
       githubPush() 
    }
+   
+   
+   
+   
     environment {
         DOCKER_IMAGE_NAME = 'scientific_calculator'
         GITHUB_REPO_URL = 'https://github.com/Sampath1-1-1/Miniproject_calculator.git'
