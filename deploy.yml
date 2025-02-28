@@ -1,23 +1,33 @@
 ---
-- name: Pull Docker Image and Run Container
-  hosts: localhost
-  remote_user: sam
-  become: false
-  tasks:
-    - name: Pull Docker Image from Docker Hub
-      docker_image:
-        name: "sampath333/test"
-        source: pull
-      register: docker_pull_result
-
-    - name: Display Docker Pull Result
-      debug:
-        var: docker_pull_result
-        
-    - name: Start Docker Service
-      service:
-        name: docker
-        state: started
-
-    - name: Run scientific_calculator Container
-      shell: docker run -it -d --name scientific_calculator sampath333/test /bin/bash
+  - name: Pull Docker Image and Run Container
+    hosts: localhost
+    remote_user: sam
+    become: false
+    tasks:
+      - name: Stop and Remove Existing sinc_calc Container (if exists)
+        shell: |
+          docker stop scientific_calculator || true
+          docker rm sscientific_calculator || true
+        ignore_errors: yes
+  
+      - name: Remove Existing Docker Image (if exists)
+        shell: docker rmi -f sampath333/test || true
+        ignore_errors: yes
+  
+      - name: Pull Docker Image from Docker Hub
+        docker_image:
+          name: "sampath333/test"
+          source: pull
+        register: docker_pull_result
+  
+      - name: Display Docker Pull Result
+        debug:
+          var: docker_pull_result
+          
+      - name: Start Docker Service
+        service:
+          name: docker
+          state: started
+  
+      - name: Run scientific_calculator Container
+        shell: docker run -it -d --name scientific_calculator sampath333/test /bin/bash
