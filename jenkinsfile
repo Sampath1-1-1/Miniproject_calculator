@@ -9,7 +9,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'scientific_calculator'
         GITHUB_REPO_URL = 'https://github.com/Sampath1-1-1/Miniproject_calculator.git'
-       //#GITHUB_REPO_URL = 'https://github.com/BThangaraju/calculator.git'
     }
 
     stages {
@@ -42,7 +41,6 @@ pipeline {
             }
         }
 
-
    stage('Run Ansible Playbook') {
             steps {
                 script {
@@ -53,6 +51,20 @@ pipeline {
                 }
             }
         }
-
     }
+
+post {
+        always {
+        emailext (
+            subject: "Build ${currentBuild.fullDisplayName} - ${currentBuild.result}",
+            body: """Build status: ${currentBuild.result}
+                     Check details here: ${env.BUILD_URL}""",
+            to: "sampathkumar1011c@gmail.com",
+            
+        )
+   	 }
+    }
+
+
 }
+
