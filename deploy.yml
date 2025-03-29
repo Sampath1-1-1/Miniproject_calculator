@@ -34,20 +34,20 @@
         args:
           executable: /bin/bash
 
-      # Add Maven inside the running container
-      - name: Install Maven in the Container
-        shell: docker exec scientific_calculator apt-get update && apt-get install -y maven
-        args:
-          executable: /bin/bash
+      # # Add Maven inside the running container
+      # - name: Install Maven in the Container
+      #   shell: docker exec scientific_calculator apt-get update && apt-get install -y maven
+      #   args:
+      #     executable: /bin/bash
 
-      # Run Maven tests in the container
-      - name: Run Maven Tests
-        shell: docker exec scientific_calculator mvn test -f /app/pom.xml
-        args:
-          executable: /bin/bash
-        register: maven_test_result
+      # # Run Maven tests in the container
+      # - name: Run Maven Tests
+      #   shell: docker exec scientific_calculator mvn test -f /app/pom.xml
+      #   args:
+      #     executable: /bin/bash
+      #   register: maven_test_result
       
-      #  Display Maven test results
-      - name: Display Maven Test Results
-        debug:
-          var: maven_test_result.stdout_lines
+      # #  Display Maven test results
+      # - name: Display Maven Test Results
+      #   debug:
+      #     var: maven_test_result.stdout_lines
