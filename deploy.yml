@@ -30,6 +30,6 @@
           state: started
   
       - name: Run scientific_calculator Container
-        shell: docker run -it  --name scientific_calculator sampath333/test /bin/bash
+        shell: docker run -it  -d --name scientific_calculator sampath333/test /bin/bash
         args:
           executable: /bin/bash
