@@ -31,3 +31,23 @@
   
       - name: Run scientific_calculator Container
         shell: docker run -it -d --name scientific_calculator sampath333/test /bin/bash
+        args:
+          executable: /bin/bash
+
+      # Add Maven inside the running container
+      - name: Install Maven in the Container
+        shell: docker exec scientific_calculator apt-get update && apt-get install -y maven
+        args:
+          executable: /bin/bash
+
+      # Run Maven tests in the container
+      - name: Run Maven Tests
+        shell: docker exec scientific_calculator mvn test -f /app/pom.xml
+        args:
+          executable: /bin/bash
+        register: maven_test_result
+      
+      #  Display Maven test results
+      - name: Display Maven Test Results
+        debug:
+          var: maven_test_result.stdout_lines
