@@ -33,4 +33,3 @@
         shell: docker run -it  -d --name scientific_calculator sampath333/test /bin/bash
         args:
           executable: /bin/bash
-#  
